@@ -1,0 +1,19 @@
+{
+  "name": "tailwindcss-scaffold",
+  "version": "0.0.1",
+  "description": "Automation tool for initializing TailwindCSS for common frameworks.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Petter Molnes",
+  "license": "ISC",
+  "dependencies": {
+    "inquirer": "^9.2.10",
+    "yargs": "^17.7.2"
+  },
+  "bin": {
+    "twcss-init": "./index.js"
+  },
+  "preferGlobal": true
+}
