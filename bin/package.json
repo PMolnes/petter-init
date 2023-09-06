@@ -13,7 +13,7 @@
     "yargs": "^17.7.2"
   },
   "bin": {
-    "twcss-init": "./index.js"
+    "petter-init": "./index.js"
   },
   "preferGlobal": true
 }
