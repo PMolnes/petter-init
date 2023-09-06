@@ -1,5 +1,5 @@
 {
-  "name": "tailwindcss-scaffold",
+  "name": "petter-init",
   "version": "0.0.1",
   "description": "Automation tool for initializing TailwindCSS for common frameworks.",
   "main": "index.js",
