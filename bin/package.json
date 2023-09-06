@@ -15,5 +15,9 @@
   "bin": {
     "petter-init": "./index.js"
   },
-  "preferGlobal": true
+  "preferGlobal": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PMolnes/petter-init.git"
+  }
 }
