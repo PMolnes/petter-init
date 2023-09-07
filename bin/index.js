@@ -1,9 +1,10 @@
 #! /usr/bin/env node
 
 const yargs = require("yargs");
-const fs = require("fs");
 const path = require("path");
 const { execSync } = require("child_process");
+
+const helper = require("./helper");
 
 const options = yargs
 	.option("framework", {
@@ -42,24 +43,18 @@ let installFramework = function (framework, projectName) {
 				execSync(
 					`cd ${projectName} && ${generateInstallDependencyCommand(
 						"tailwindcss postcss autoprefixer"
-					)} && npx tailwindcss init -p && cp ${path.join(templatePath, "tailwind.config.js")} . && cp ${path.join(
-						templatePath,
-						"app.css"
-					)} ./src && cp ${path.join(templatePath, "+layout.svelte")} "./src/routes"`,
+					)} && npx tailwindcss init -p && ${helper.copyTemplateFile(
+						framework,
+						"tailwind.config.js"
+					)} && ${helper.copyTemplateFile(framework, "app.css", "./src")} && ${helper.copyTemplateFile(
+						framework,
+						"+layout.svelte",
+						"./src/routes"
+					)}`,
 					{
 						stdio: "inherit",
 					}
 				);
-
-				// const projectParentDir = execSync("pwd", { stdio: "pipe" }).toString().trim();
-				// const projectDir = path.join(projectParentDir, projectName, "tailwind.config.js");
-				// console.log("Project Parent Directory: " + projectParentDir);
-				// console.log("Full project path: " + projectDir);
-
-				// fs.copyFile(templatePath, projectDir, (err) => {
-				// 	if (err) throw err;
-				// 	console.log("successfully copied");
-				// });
 				break;
 			case "react":
 				break;
