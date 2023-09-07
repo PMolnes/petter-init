@@ -9,7 +9,6 @@
   "author": "Petter Molnes",
   "license": "ISC",
   "dependencies": {
-    "inquirer": "^9.2.10",
     "yargs": "^17.7.2"
   },
   "bin": {
