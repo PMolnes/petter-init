@@ -1,19 +1,27 @@
 {
-  "name": "tailwindcss-scaffold",
-  "version": "0.0.1",
+  "name": "petter-init",
+  "version": "0.0.3",
   "description": "Automation tool for initializing TailwindCSS for common frameworks.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "Petter Molnes",
   "license": "ISC",
   "dependencies": {
-    "inquirer": "^9.2.10",
     "yargs": "^17.7.2"
   },
+  "files": ["./", "./!test"],
   "bin": {
     "petter-init": "./index.js"
   },
-  "preferGlobal": true
+  "preferGlobal": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PMolnes/petter-init.git"
+  },
+  "devDependencies": {
+    "jest": "^29.6.4",
+    "prettier": "3.0.3"
+  }
 }
