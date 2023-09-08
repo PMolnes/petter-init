@@ -19,4 +19,4 @@ The name is a play on "better-init", but as it was taken on npm, I decided to us
 
 # Disclaimer
 
-This project was solely created for learning purposes and hobby projects. It's open-source and free-to-use for non-commercial use. I do not take any responibility if anything goes wrong when you use my package. **Use at your own risk**. If you decide to fork my code and create something non-commerical thats fine, all I ask is that you credit me.
+This project was solely created for learning purposes and hobby projects. I do not take any responibility if anything goes wrong when you use my package. **Use at your own risk**.
