@@ -14,7 +14,7 @@ function setupSvelteKit(packageManager, projectName) {
 			"sveltekit",
 			"+layout.svelte",
 			"./src/routes"
-		)}`
+		)} && ${helper.copyTemplateFileString("sveltekit", "svelte.config.js")}`
 	);
 }
 
