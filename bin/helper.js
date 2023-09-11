@@ -9,6 +9,10 @@ const copyTemplateFileString = (framework, templateToCopy, destination = ".") =>
 	return `cp ${path.join(templatePath, templateToCopy)} ${destination}`;
 };
 
+const getProjectPath = (projectName) => {
+	return path.resolve(projectName);
+};
+
 const executeCommand = (command) => {
 	try {
 		execSync(command, { stdio: "inherit" });
@@ -39,4 +43,5 @@ module.exports = {
 	executeCommand,
 	generateInstallDependencyCommand,
 	initializeTailwindCSS,
+	getProjectPath,
 };
