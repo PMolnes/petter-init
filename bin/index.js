@@ -3,6 +3,7 @@
 const yargs = require("yargs");
 
 const { setupSvelteKit } = require("./sveltekit");
+const { setupVue } = require("./vue");
 
 const options = yargs
 	.option("framework", {
@@ -38,6 +39,7 @@ let installFramework = function (framework, projectName) {
 			case "react":
 				break;
 			case "vue":
+				setupVue(packageManager, projectName);
 				break;
 		}
 	} catch (error) {
@@ -65,6 +67,7 @@ const frameworkSetup = {
 	vue: () => {
 		console.log("Setting up Tailwind CSS for Vue...");
 		// Add setup steps for Vue here
+		installFramework(framework, projectName);
 	},
 };
 
