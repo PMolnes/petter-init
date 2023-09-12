@@ -19,7 +19,7 @@ const options = yargs
 		choices: ["npm", "yarn", "pnpm"],
 	})
 	.option("project-name", {
-		alias: "pn",
+		alias: "n",
 		description: "Name of your project",
 		type: yargs.string,
 	})
