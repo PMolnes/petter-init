@@ -1,10 +1,11 @@
 {
   "name": "petter-init",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Automation tool for initializing TailwindCSS for common frameworks.",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "prepublishOnly": "cp ../readme.md ."
   },
   "author": "Petter Molnes",
   "license": "ISC",
@@ -20,6 +21,15 @@
     "type": "git",
     "url": "https://github.com/PMolnes/petter-init.git"
   },
+  "keywords": [
+    "setup",
+    "tailwindcss",
+    "initializer",
+    "vue",
+    "sveltekit",
+    "react",
+    "nuxt"
+  ],
   "devDependencies": {
     "jest": "^29.6.4",
     "prettier": "3.0.3"
