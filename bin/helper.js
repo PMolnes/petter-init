@@ -1,5 +1,6 @@
 const path = require("path");
 const { execSync } = require("child_process");
+const fs = require("fs");
 
 /*
   Return a string based on the framework selected and which template to copy.
@@ -30,6 +31,11 @@ const initializeTailwindCSS = (packageManager, projectName) => {
 	);
 };
 
+const emptyFolder = (dirPath) => {
+	fs.rmSync(dirPath, { recursive: true, force: true });
+	fs.mkdirSync(dirPath);
+};
+
 const generateInstallDependencyCommand = (packageManager, packageName, dev = true) => {
 	let installKeyword = "install";
 
@@ -44,4 +50,5 @@ module.exports = {
 	generateInstallDependencyCommand,
 	initializeTailwindCSS,
 	getProjectPath,
+	emptyFolder,
 };
