@@ -5,6 +5,7 @@ const path = require("path");
 function setupVue(packageManager, projectName) {
 	helper.executeCommand(`${packageManager} create vue@latest ${projectName}`);
 
+	console.log("Initializing tailwindcss...");
 	helper.initializeTailwindCSS(packageManager, projectName);
 
 	helper.executeCommand(
@@ -19,6 +20,16 @@ function setupVue(packageManager, projectName) {
 	);
 
 	importStyleInMainFile(projectName);
+
+	console.log("Removing boilerplate files...");
+	removeBoilerPlateFiles(projectName);
+}
+
+function removeBoilerPlateFiles(projectName) {
+	const projectPath = helper.getProjectPath(projectName);
+	helper.emptyFolder(path.join(projectPath, "src", "assets"));
+	helper.emptyFolder(path.join(projectPath, "src", "components"));
+	helper.emptyFolder(path.join(projectPath, "src", "views"));
 }
 
 function findPathToMainFile(projectName) {
@@ -32,6 +43,7 @@ function findPathToMainFile(projectName) {
 function importStyleInMainFile(projectName) {
 	const path = findPathToMainFile(projectName);
 	let fileContent = fs.readFileSync(path);
+	fileContent = fileContent.toString().replace("import './assets/main.css'", "");
 	fileContent = 'import("./style.css");\n' + fileContent;
 
 	fs.writeFileSync(path, fileContent, "utf-8");
