@@ -1,6 +1,6 @@
-const helper = require("./helper");
+import helper from "./helper.js";
 
-function setupSvelteKit(packageManager, projectName) {
+export default function setupSvelteKit(packageManager, projectName) {
 	console.log("Setup your SvelteKit project...");
 	helper.executeCommand(`${packageManager} create svelte@latest ${projectName}`);
 
@@ -17,7 +17,3 @@ function setupSvelteKit(packageManager, projectName) {
 		)} && ${helper.copyTemplateFileString("sveltekit", "svelte.config.js")}`
 	);
 }
-
-module.exports = {
-	setupSvelteKit,
-};

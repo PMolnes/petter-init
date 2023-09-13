@@ -1,35 +1,40 @@
 #! /usr/bin/env node
 
-const yargs = require("yargs");
+import inquirer from "inquirer";
 
-const { setupSvelteKit } = require("./sveltekit");
-const { setupVue } = require("./vue");
+import setupSvelteKit from "./sveltekit.js";
+import setupVue from "./vue.js";
 
-const options = yargs
-	.option("framework", {
-		alias: "f",
-		description: "Framework to setup TailwindCSS for",
-		demandOption: true,
-		choices: ["react", "vue", "sveltekit"],
-	})
-	.option("package-manager", {
-		alias: "p",
-		description: "Package manager to use",
-		demandOption: true,
+const answers = await inquirer.prompt([
+	{
+		name: "framework",
+		message: "Select the framework you would like to use.",
+		type: "list",
+		choices: ["sveltekit", "vue", "react"],
+	},
+	{
+		name: "language",
+		message: "JavaScript or TypeScript?",
+		type: "list",
+		choices: ["js", "ts"],
+		when: (answers) => answers.framework === "react",
+	},
+	{
+		name: "packageManager",
+		message: "Select the package manager you want to use.",
+		type: "list",
 		choices: ["npm", "yarn", "pnpm"],
-	})
-	.option("project-name", {
-		alias: "n",
-		description: "Name of your project",
-		demandOption: true,
-		type: yargs.string,
-	})
-	.help()
-	.alias("help", "h").argv;
+	},
+	{
+		name: "projectName",
+		message: "Select the name for your project.",
+		type: "input",
+	},
+]);
 
-const framework = options.framework;
-const packageManager = options.packageManager;
-const projectName = options.projectName;
+const framework = answers.framework;
+const packageManager = answers.packageManager;
+const projectName = answers.projectName;
 
 let installFramework = function (framework, projectName) {
 	try {
@@ -49,11 +54,7 @@ let installFramework = function (framework, projectName) {
 };
 
 // export functions
-module.exports = {
-	installFramework: installFramework,
-	projectName,
-	packageManager,
-};
+export { installFramework, projectName, packageManager };
 
 const frameworkSetup = {
 	sveltekit: () => {

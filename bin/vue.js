@@ -1,8 +1,8 @@
-const helper = require("./helper");
-const fs = require("fs");
-const path = require("path");
+import helper from "./helper.js";
+import fs from "fs";
+import path from "path";
 
-function setupVue(packageManager, projectName) {
+export default function setupVue(packageManager, projectName) {
 	helper.executeCommand(`${packageManager} create vue@latest ${projectName}`);
 
 	console.log("Initializing tailwindcss...");
@@ -48,7 +48,3 @@ function importStyleInMainFile(projectName) {
 
 	fs.writeFileSync(path, fileContent, "utf-8");
 }
-
-module.exports = {
-	setupVue,
-};

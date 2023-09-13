@@ -1,18 +1,22 @@
 {
   "name": "petter-init",
   "version": "0.1.2",
+  "type": "module",
   "description": "Automation tool for initializing TailwindCSS for common frameworks.",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "prepublishOnly": "cp ../readme.md ."
   },
   "author": "Petter Molnes",
   "license": "ISC",
   "dependencies": {
-    "yargs": "^17.7.2"
+    "inquirer": "^9.2.11"
   },
-  "files": ["./", "./!test"],
+  "files": [
+    "./",
+    "./!test"
+  ],
   "bin": {
     "petter-init": "./index.js"
   },
