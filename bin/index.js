@@ -21,6 +21,7 @@ const options = yargs
 	.option("project-name", {
 		alias: "n",
 		description: "Name of your project",
+		demandOption: true,
 		type: yargs.string,
 	})
 	.help()
