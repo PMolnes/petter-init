@@ -1,11 +1,13 @@
-const path = require("path");
-const { execSync } = require("child_process");
-const fs = require("fs");
+import path from "path";
+import { execSync } from "child_process";
+import fs from "fs";
+import { fileURLToPath } from "url";
 
 /*
   Return a string based on the framework selected and which template to copy.
 */
 const copyTemplateFileString = (framework, templateToCopy, destination = ".") => {
+	const __dirname = path.dirname(fileURLToPath(import.meta.url));
 	let templatePath = path.join(__dirname, framework);
 	return `cp ${path.join(templatePath, templateToCopy)} ${destination}`;
 };
@@ -44,7 +46,7 @@ const generateInstallDependencyCommand = (packageManager, packageName, dev = tru
 	return `${packageManager} ${installKeyword} ${dev === true ? "-D" : ""} ${packageName}`;
 };
 
-module.exports = {
+export default {
 	copyTemplateFileString,
 	executeCommand,
 	generateInstallDependencyCommand,
