@@ -1,6 +1,4 @@
 import helper from "./helper.js";
-import fs from "fs";
-import path from "path";
 
 export default function setupReact(packageManager, projectName, language) {
 	const isTypeScript = language === "ts";
