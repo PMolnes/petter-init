@@ -1,6 +1,6 @@
 {
   "name": "petter-init",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "type": "module",
   "description": "Automation tool for initializing TailwindCSS for common frameworks.",
   "main": "index.js",
