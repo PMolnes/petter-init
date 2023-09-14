@@ -15,4 +15,6 @@ export default function setupReact(packageManager, projectName, language) {
 	helper.copyFile("react", "tailwind.config.js", projectName, ["tailwind.config.js"]);
 	helper.copyFile("react", "index.css", projectName, ["src", "index.css"]);
 	helper.copyFile("react", "App.jsx", projectName, ["src", `App.${isTypeScript ? "tsx" : "jsx"}`]);
+
+	helper.removeFile(projectName, ["src", "App.css"]);
 }

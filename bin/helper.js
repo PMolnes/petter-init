@@ -49,6 +49,10 @@ const emptyFolder = (dirPath) => {
 	fs.mkdirSync(dirPath);
 };
 
+const removeFile = (projectName, pathToFile) => {
+	fs.rmSync(path.join(getProjectPath(projectName), ...pathToFile));
+};
+
 const generateInstallDependencyCommand = (packageManager, packageName, dev = true) => {
 	let installKeyword = "install";
 
@@ -64,4 +68,5 @@ export default {
 	getProjectPath,
 	emptyFolder,
 	copyFile,
+	removeFile,
 };
