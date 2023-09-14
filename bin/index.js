@@ -36,15 +36,16 @@ const answers = await inquirer.prompt([
 const framework = answers.framework;
 const packageManager = answers.packageManager;
 const projectName = answers.projectName;
+const language = answers.language;
 
-let installFramework = function (framework, projectName) {
+let installFramework = function () {
 	try {
 		switch (framework) {
 			case "sveltekit":
 				setupSvelteKit(packageManager, projectName);
 				break;
 			case "react":
-				setupReact(packageManager, projectName);
+				setupReact(packageManager, projectName, language);
 				break;
 			case "vue":
 				setupVue(packageManager, projectName);
@@ -62,17 +63,17 @@ const frameworkSetup = {
 	sveltekit: () => {
 		console.log("Setting up Tailwind CSS for SvelteKit...");
 		// Add setup steps for SvelteKit here
-		installFramework(framework, projectName);
+		installFramework();
 	},
 	react: () => {
 		console.log("Setting up Tailwind CSS for React...");
 		// Add setup steps for React here
-		installFramework(framework, projectName);
+		installFramework();
 	},
 	vue: () => {
 		console.log("Setting up Tailwind CSS for Vue...");
 		// Add setup steps for Vue here
-		installFramework(framework, projectName);
+		installFramework();
 	},
 };
 

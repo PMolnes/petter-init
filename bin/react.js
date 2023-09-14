@@ -3,8 +3,9 @@ import fs from "fs";
 import path from "path";
 
 export default function setupReact(packageManager, projectName, language) {
+	const isTypeScript = language === "ts";
 	helper.executeCommand(
-		`${packageManager} create vite@latest ${projectName} -- --template react${language === "ts" ? "-ts" : ""}`
+		`${packageManager} create vite@latest ${projectName} -- --template react${isTypeScript ? "-ts" : ""}`
 	);
 
 	console.log("Initializing tailwindcss...");
@@ -17,7 +18,7 @@ export default function setupReact(packageManager, projectName, language) {
 		)} && ${helper.copyTemplateFileString("react", "index.css", "./src")} && ${helper.copyTemplateFileString(
 			"react",
 			"App.jsx",
-			"./src"
+			`./src/App.${isTypeScript ? "tsx" : "jsx"}`
 		)}`
 	);
 }
