@@ -1,6 +1,6 @@
 import path from "path";
 import { execSync } from "child_process";
-import fs from "fs";
+import fs, { copyFileSync } from "fs";
 import { fileURLToPath } from "url";
 
 /*
@@ -10,6 +10,12 @@ const copyTemplateFileString = (framework, templateToCopy, destination = ".") =>
 	const __dirname = path.dirname(fileURLToPath(import.meta.url));
 	let templatePath = path.join(__dirname, framework);
 	return `cp ${path.join(templatePath, templateToCopy)} ${destination}`;
+};
+
+const copyFile = (framework, templateToCopy, projectName, destination) => {
+	const pathToTemplate = path.join(getPathToTemplates(framework), templateToCopy);
+	const pathToDestination = path.join(getProjectPath(projectName), ...destination);
+	copyFileSync(pathToTemplate, pathToDestination);
 };
 
 const getPathToTemplates = (framework) => {
@@ -54,9 +60,8 @@ const generateInstallDependencyCommand = (packageManager, packageName, dev = tru
 export default {
 	copyTemplateFileString,
 	executeCommand,
-	generateInstallDependencyCommand,
 	initializeTailwindCSS,
 	getProjectPath,
 	emptyFolder,
-	getPathToTemplates,
+	copyFile,
 };

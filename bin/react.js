@@ -1,6 +1,4 @@
 import helper from "./helper.js";
-import { copyFileSync } from "fs";
-import path from "path";
 
 export default function setupReact(packageManager, projectName, language) {
 	const isTypeScript = language === "ts";
@@ -12,16 +10,7 @@ export default function setupReact(packageManager, projectName, language) {
 
 	helper.initializeTailwindCSS(packageManager, projectName);
 
-	copyFileSync(
-		path.join(helper.getPathToTemplates("react"), "tailwind.config.js"),
-		path.join(helper.getProjectPath(projectName), "tailwind.config.js")
-	);
-	copyFileSync(
-		path.join(helper.getPathToTemplates("react"), "index.css"),
-		path.join(helper.getProjectPath(projectName), "src", "index.css")
-	);
-	copyFileSync(
-		path.join(helper.getPathToTemplates("react"), "App.jsx"),
-		path.join(helper.getProjectPath(projectName), "src", `App.${isTypeScript ? "tsx" : "jsx"}`)
-	);
+	helper.copyFile("react", "tailwind.config.js", projectName, ["tailwind.config.js"]);
+	helper.copyFile("react", "index.css", projectName, ["src", "index.css"]);
+	helper.copyFile("react", "App.jsx", projectName, ["src", `App.${isTypeScript ? "tsx" : "jsx"}`]);
 }
