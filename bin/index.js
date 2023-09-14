@@ -4,6 +4,7 @@ import inquirer from "inquirer";
 
 import setupSvelteKit from "./sveltekit.js";
 import setupVue from "./vue.js";
+import setupReact from "./react.js";
 
 const answers = await inquirer.prompt([
 	{
@@ -43,6 +44,7 @@ let installFramework = function (framework, projectName) {
 				setupSvelteKit(packageManager, projectName);
 				break;
 			case "react":
+				setupReact(packageManager, projectName);
 				break;
 			case "vue":
 				setupVue(packageManager, projectName);
@@ -65,6 +67,7 @@ const frameworkSetup = {
 	react: () => {
 		console.log("Setting up Tailwind CSS for React...");
 		// Add setup steps for React here
+		installFramework(framework, projectName);
 	},
 	vue: () => {
 		console.log("Setting up Tailwind CSS for Vue...");
