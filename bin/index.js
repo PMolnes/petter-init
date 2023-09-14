@@ -66,8 +66,6 @@ const frameworkSetup = {
 		installFramework();
 	},
 	react: () => {
-		console.log("Setting up Tailwind CSS for React...");
-		// Add setup steps for React here
 		installFramework();
 	},
 	vue: () => {

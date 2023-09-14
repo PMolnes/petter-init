@@ -2,6 +2,8 @@ import helper from "./helper.js";
 
 export default function setupReact(packageManager, projectName, language) {
 	const isTypeScript = language === "ts";
+
+	console.log(`Setting up project: ${projectName}`);
 	helper.executeCommand(
 		`${packageManager} create vite@latest ${projectName} -- --template react${isTypeScript ? "-ts" : ""}`
 	);
