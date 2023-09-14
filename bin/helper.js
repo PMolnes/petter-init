@@ -1,6 +1,6 @@
 import path from "path";
 import { execSync } from "child_process";
-import fs from "fs";
+import fs, { copyFileSync } from "fs";
 import { fileURLToPath } from "url";
 
 /*
@@ -10,6 +10,17 @@ const copyTemplateFileString = (framework, templateToCopy, destination = ".") =>
 	const __dirname = path.dirname(fileURLToPath(import.meta.url));
 	let templatePath = path.join(__dirname, framework);
 	return `cp ${path.join(templatePath, templateToCopy)} ${destination}`;
+};
+
+const copyFile = (framework, templateToCopy, projectName, destination) => {
+	const pathToTemplate = path.join(getPathToTemplates(framework), templateToCopy);
+	const pathToDestination = path.join(getProjectPath(projectName), ...destination);
+	copyFileSync(pathToTemplate, pathToDestination);
+};
+
+const getPathToTemplates = (framework) => {
+	const __dirname = path.dirname(fileURLToPath(import.meta.url));
+	return path.join(__dirname, framework);
 };
 
 const getProjectPath = (projectName) => {
@@ -38,6 +49,10 @@ const emptyFolder = (dirPath) => {
 	fs.mkdirSync(dirPath);
 };
 
+const removeFile = (projectName, pathToFile) => {
+	fs.rmSync(path.join(getProjectPath(projectName), ...pathToFile));
+};
+
 const generateInstallDependencyCommand = (packageManager, packageName, dev = true) => {
 	let installKeyword = "install";
 
@@ -49,8 +64,9 @@ const generateInstallDependencyCommand = (packageManager, packageName, dev = tru
 export default {
 	copyTemplateFileString,
 	executeCommand,
-	generateInstallDependencyCommand,
 	initializeTailwindCSS,
 	getProjectPath,
 	emptyFolder,
+	copyFile,
+	removeFile,
 };
