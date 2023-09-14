@@ -12,6 +12,11 @@ const copyTemplateFileString = (framework, templateToCopy, destination = ".") =>
 	return `cp ${path.join(templatePath, templateToCopy)} ${destination}`;
 };
 
+const getPathToTemplates = (framework) => {
+	const __dirname = path.dirname(fileURLToPath(import.meta.url));
+	return path.join(__dirname, framework);
+};
+
 const getProjectPath = (projectName) => {
 	return path.resolve(projectName);
 };
@@ -53,4 +58,5 @@ export default {
 	initializeTailwindCSS,
 	getProjectPath,
 	emptyFolder,
+	getPathToTemplates,
 };
