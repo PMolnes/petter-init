@@ -1,16 +1,18 @@
 import helper from "./helper.js";
+import { getProjectInfo } from "./projectInfo.js";
 
-export default function setupReact(packageManager, projectName, framework, language) {
+export default function setupReact() {
+	const { projectName, language } = getProjectInfo();
 	console.log(`Setting up project: ${projectName}`);
-	helper.initializeViteProject(packageManager, projectName, framework, language);
+	helper.initializeViteProject();
 
 	console.log("Initializing tailwindcss...");
 
-	helper.initializeTailwindCSS(packageManager, projectName);
+	helper.initializeTailwindCSS();
 
-	helper.copyFile("react", "tailwind.config.js", projectName, ["tailwind.config.js"]);
-	helper.copyFile("react", "index.css", projectName, ["src", "index.css"]);
-	helper.copyFile("react", "App.jsx", projectName, ["src", `App.${language === "ts" ? "tsx" : "jsx"}`]);
+	helper.copyFile("tailwind.config.js", ["tailwind.config.js"]);
+	helper.copyFile("index.css", ["src", "index.css"]);
+	helper.copyFile("App.jsx", ["src", `App.${language === "ts" ? "tsx" : "jsx"}`]);
 
-	helper.removeFile(projectName, ["src", "App.css"]);
+	helper.removeFile(["src", "App.css"]);
 }

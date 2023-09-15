@@ -1,15 +1,18 @@
 import helper from "./helper.js";
 import path from "path";
+import { getProjectInfo } from "./projectInfo.js";
 
-export default function setupVue(packageManager, projectName, framework, language) {
-	helper.initializeViteProject(packageManager, projectName, framework, language);
+export default function setupVue() {
+	const { projectName } = getProjectInfo();
+
+	helper.initializeViteProject();
 
 	console.log("Initializing tailwindcss...");
-	helper.initializeTailwindCSS(packageManager, projectName);
+	helper.initializeTailwindCSS();
 
-	helper.copyFile("vue", "tailwind.config.js", projectName, ["tailwind.config.js"]);
-	helper.copyFile("vue", "App.vue", projectName, ["src", "App.vue"]);
-	helper.copyFile("vue", "style.css", projectName, ["src", "style.css"]);
+	helper.copyFile("tailwind.config.js", ["tailwind.config.js"]);
+	helper.copyFile("App.vue", ["src", "App.vue"]);
+	helper.copyFile("style.css", ["src", "style.css"]);
 
 	console.log("Removing boilerplate files...");
 	removeBoilerPlateFiles(projectName);

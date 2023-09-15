@@ -1,14 +1,16 @@
 import helper from "./helper.js";
+import { getProjectInfo } from "./projectInfo.js";
 
-export default function setupSvelteKit(packageManager, projectName) {
+export default function setupSvelteKit() {
+	const { packageManager, projectName } = getProjectInfo();
 	console.log("Setup your SvelteKit project...");
-	helper.executeCommand(`${packageManager} create svelte@latest ${projectName}`);
+	helper.executeCommand(`${packageManager} create svelte${packageManager !== "yarn" ? "@latest" : ""} ${projectName}`);
 
 	console.log("Initializing tailwindcss...");
-	helper.initializeTailwindCSS(packageManager, projectName);
+	helper.initializeTailwindCSS();
 
-	helper.copyFile("sveltekit", "tailwind.config.js", projectName, ["tailwind.config.js"]);
-	helper.copyFile("sveltekit", "svelte.config.js", projectName, ["svelte.config.js"]);
-	helper.copyFile("sveltekit", "app.css", projectName, ["src", "app.css"]);
-	helper.copyFile("sveltekit", "+layout.svelte", projectName, ["src", "routes", "+layout.svelte"]);
+	helper.copyFile("tailwind.config.js", ["tailwind.config.js"]);
+	helper.copyFile("svelte.config.js", ["svelte.config.js"]);
+	helper.copyFile("app.css", ["src", "app.css"]);
+	helper.copyFile("+layout.svelte", ["src", "routes", "+layout.svelte"]);
 }
