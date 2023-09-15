@@ -20,7 +20,7 @@ const copyFile = (framework, templateToCopy, projectName, destination) => {
 
 const getPathToTemplates = (framework) => {
 	const __dirname = path.dirname(fileURLToPath(import.meta.url));
-	return path.join(__dirname, framework);
+	return path.join(__dirname, "templates", framework);
 };
 
 const getProjectPath = (projectName) => {
@@ -42,6 +42,12 @@ const initializeTailwindCSS = (packageManager, projectName) => {
 			"tailwindcss postcss autoprefixer"
 		)} && npx tailwindcss init -p`
 	);
+};
+
+const initializeViteProject = (packageManager, projectName, framework, language) => {
+	const extraDash = packageManager === "npm" ? "--" : "";
+	const template = `--template ${framework}${language === "ts" ? "-ts" : ""}`;
+	executeCommand(`${packageManager} create vite@latest ${projectName} ${extraDash} ${template}`);
 };
 
 const emptyFolder = (dirPath) => {
@@ -69,4 +75,5 @@ export default {
 	emptyFolder,
 	copyFile,
 	removeFile,
+	initializeViteProject,
 };
