@@ -18,7 +18,7 @@ const answers = await inquirer.prompt([
 		message: "JavaScript or TypeScript?",
 		type: "list",
 		choices: ["js", "ts"],
-		when: (answers) => answers.framework === "react",
+		when: (answers) => answers.framework === "react" || answers.framework === "vue",
 	},
 	{
 		name: "packageManager",
@@ -48,7 +48,7 @@ let installFramework = function () {
 				setupReact(packageManager, projectName, language);
 				break;
 			case "vue":
-				setupVue(packageManager, projectName);
+				setupVue(packageManager, projectName, framework, language);
 				break;
 		}
 	} catch (error) {

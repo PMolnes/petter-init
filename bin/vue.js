@@ -1,50 +1,23 @@
 import helper from "./helper.js";
-import fs from "fs";
 import path from "path";
 
-export default function setupVue(packageManager, projectName) {
-	helper.executeCommand(`${packageManager} create vue@latest ${projectName}`);
+export default function setupVue(packageManager, projectName, framework, language) {
+	helper.initializeViteProject(packageManager, projectName, framework, language);
 
 	console.log("Initializing tailwindcss...");
 	helper.initializeTailwindCSS(packageManager, projectName);
 
-	helper.executeCommand(
-		`cd ${projectName} && ${helper.copyTemplateFileString(
-			"vue",
-			"tailwind.config.js"
-		)} && ${helper.copyTemplateFileString("vue", "style.css", "./src")} && ${helper.copyTemplateFileString(
-			"vue",
-			"App.vue",
-			"./src"
-		)}`
-	);
-
-	importStyleInMainFile(projectName);
+	helper.copyFile("vue", "tailwind.config.js", projectName, ["tailwind.config.js"]);
+	helper.copyFile("vue", "App.vue", projectName, ["src", "App.vue"]);
+	helper.copyFile("vue", "style.css", projectName, ["src", "style.css"]);
 
 	console.log("Removing boilerplate files...");
 	removeBoilerPlateFiles(projectName);
+	console.log("Completed.");
 }
 
 function removeBoilerPlateFiles(projectName) {
 	const projectPath = helper.getProjectPath(projectName);
 	helper.emptyFolder(path.join(projectPath, "src", "assets"));
 	helper.emptyFolder(path.join(projectPath, "src", "components"));
-	helper.emptyFolder(path.join(projectPath, "src", "views"));
-}
-
-function findPathToMainFile(projectName) {
-	const files = fs.readdirSync(helper.getProjectPath(projectName) + "/src");
-
-	const main = files.find((fileName) => fileName.includes("main"));
-
-	return path.join(helper.getProjectPath(projectName), "src", main);
-}
-
-function importStyleInMainFile(projectName) {
-	const path = findPathToMainFile(projectName);
-	let fileContent = fs.readFileSync(path);
-	fileContent = fileContent.toString().replace("import './assets/main.css'", "");
-	fileContent = 'import("./style.css");\n' + fileContent;
-
-	fs.writeFileSync(path, fileContent, "utf-8");
 }
