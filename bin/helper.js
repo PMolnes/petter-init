@@ -14,9 +14,8 @@ const copyTemplateFileString = (framework, templateToCopy, destination = ".") =>
 };
 
 const copyFile = (templateToCopy, destination) => {
-	const { projectName } = getProjectInfo();
 	const pathToTemplate = path.join(getPathToTemplates(), templateToCopy);
-	const pathToDestination = path.join(getProjectPath(projectName), ...destination);
+	const pathToDestination = path.join(getProjectPath(), ...destination);
 	copyFileSync(pathToTemplate, pathToDestination);
 };
 
@@ -63,8 +62,7 @@ const emptyFolder = (dirPath) => {
 };
 
 const removeFile = (pathToFile) => {
-	const { projectName } = getProjectInfo();
-	fs.rmSync(path.join(getProjectPath(projectName), ...pathToFile));
+	fs.rmSync(path.join(getProjectPath(), ...pathToFile));
 };
 
 const generateInstallDependencyCommand = (packageName, dev = true) => {
