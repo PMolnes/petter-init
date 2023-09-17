@@ -52,7 +52,7 @@ const initializeViteProject = () => {
 	const extraDash = packageManager === "npm" ? "-- " : "";
 	const template = `--template ${framework}${language === "ts" ? "-ts" : ""}`;
 	executeCommand(
-		`${packageManager} create${packageManager !== "yarn" ? "@latest" : ""} vite ${projectName} ${extraDash}${template}`
+		`${packageManager} create vite${packageManager !== "yarn" ? "@latest" : ""}  ${projectName} ${extraDash}${template}`
 	);
 };
 
