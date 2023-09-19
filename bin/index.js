@@ -1,11 +1,22 @@
 #! /usr/bin/env node
 
 import inquirer from "inquirer";
+import chalk from "chalk";
 
 import setupSvelteKit from "./sveltekit.js";
 import setupVue from "./vue.js";
 import setupReact from "./react.js";
 import { getProjectInfo, setFramework, setLanguage, setPackageManager, setProjectName } from "./projectInfo.js";
+
+console.log(
+	chalk.green(`
+         #   #               #      #  #
+### ### ### ### ### ###         ##    ###
+# # ##   #   #  ##  #   ###  #  # # #  #
+### ###  ##  ## ### #        ## # # ## ##
+#
+  `)
+);
 
 const answers = await inquirer.prompt([
 	{
