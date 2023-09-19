@@ -14,6 +14,9 @@ jobs:
       run:
         working-directory: ./bin/
     steps:
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
@@ -30,9 +33,6 @@ jobs:
       run:
         working-directory: ./bin/
     steps:
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
