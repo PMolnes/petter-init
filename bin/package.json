@@ -11,6 +11,7 @@
   "author": "Petter Molnes",
   "license": "ISC",
   "dependencies": {
+    "chalk": "^5.3.0",
     "inquirer": "^9.2.11"
   },
   "files": [
@@ -35,6 +36,7 @@
     "nuxt"
   ],
   "devDependencies": {
+    "create-svelte": "^5.0.6",
     "jest": "^29.6.4",
     "prettier": "3.0.3"
   }

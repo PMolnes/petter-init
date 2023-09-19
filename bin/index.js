@@ -1,10 +1,22 @@
 #! /usr/bin/env node
 
 import inquirer from "inquirer";
+import chalk from "chalk";
 
 import setupSvelteKit from "./sveltekit.js";
 import setupVue from "./vue.js";
 import setupReact from "./react.js";
+import { getProjectInfo, setFramework, setLanguage, setPackageManager, setProjectName } from "./projectInfo.js";
+
+console.log(
+	chalk.green(`
+         #   #               #      #  #
+### ### ### ### ### ###         ##    ###
+# # ##   #   #  ##  #   ###  #  # # #  #
+### ###  ##  ## ### #        ## # # ## ##
+#
+  `)
+);
 
 const answers = await inquirer.prompt([
 	{
@@ -18,7 +30,7 @@ const answers = await inquirer.prompt([
 		message: "JavaScript or TypeScript?",
 		type: "list",
 		choices: ["js", "ts"],
-		when: (answers) => answers.framework === "react",
+		when: (answers) => answers.framework === "react" || answers.framework === "vue",
 	},
 	{
 		name: "packageManager",
@@ -33,50 +45,27 @@ const answers = await inquirer.prompt([
 	},
 ]);
 
-const framework = answers.framework;
-const packageManager = answers.packageManager;
-const projectName = answers.projectName;
-const language = answers.language;
+setFramework(answers.framework);
+setPackageManager(answers.packageManager);
+setProjectName(answers.projectName);
+setLanguage(answers.language);
 
-let installFramework = function () {
-	try {
-		switch (framework) {
-			case "sveltekit":
-				setupSvelteKit(packageManager, projectName);
-				break;
-			case "react":
-				setupReact(packageManager, projectName, language);
-				break;
-			case "vue":
-				setupVue(packageManager, projectName);
-				break;
-		}
-	} catch (error) {
-		console.error(`Failed to create ${framework} app: `, error.message);
+const projectInfo = getProjectInfo();
+
+try {
+	switch (projectInfo.framework) {
+		case "sveltekit":
+			setupSvelteKit();
+			break;
+		case "react":
+			setupReact();
+			break;
+		case "vue":
+			setupVue();
+			break;
+		default:
+			console.error("Invalid framework choice. Support frameworks are: sveltekit, react, vue.");
 	}
-};
-
-// export functions
-export { installFramework, projectName, packageManager };
-
-const frameworkSetup = {
-	sveltekit: () => {
-		console.log("Setting up Tailwind CSS for SvelteKit...");
-		// Add setup steps for SvelteKit here
-		installFramework();
-	},
-	react: () => {
-		installFramework();
-	},
-	vue: () => {
-		console.log("Setting up Tailwind CSS for Vue...");
-		// Add setup steps for Vue here
-		installFramework();
-	},
-};
-
-if (frameworkSetup[framework]) {
-	frameworkSetup[framework]();
-} else {
-	console.error("Invalid framework choice. Supported frameworks: sveltekit, react, vue");
+} catch (error) {
+	console.error(`Failed to create ${projectInfo.framework} app: `, error.message);
 }

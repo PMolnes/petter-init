@@ -1,50 +1,26 @@
 import helper from "./helper.js";
-import fs from "fs";
 import path from "path";
+import chalk from "chalk";
+import { getProjectInfo } from "./projectInfo.js";
 
-export default function setupVue(packageManager, projectName) {
-	helper.executeCommand(`${packageManager} create vue@latest ${projectName}`);
+export default function setupVue() {
+	const { projectName } = getProjectInfo();
 
-	console.log("Initializing tailwindcss...");
-	helper.initializeTailwindCSS(packageManager, projectName);
+	helper.initializeViteProject();
 
-	helper.executeCommand(
-		`cd ${projectName} && ${helper.copyTemplateFileString(
-			"vue",
-			"tailwind.config.js"
-		)} && ${helper.copyTemplateFileString("vue", "style.css", "./src")} && ${helper.copyTemplateFileString(
-			"vue",
-			"App.vue",
-			"./src"
-		)}`
-	);
+	helper.initializeTailwindCSS();
 
-	importStyleInMainFile(projectName);
+	helper.copyFile("tailwind.config.js", ["tailwind.config.js"]);
+	helper.copyFile("App.vue", ["src", "App.vue"]);
+	helper.copyFile("style.css", ["src", "style.css"]);
 
-	console.log("Removing boilerplate files...");
 	removeBoilerPlateFiles(projectName);
+	console.log(chalk.green("\nπ Completed."));
 }
 
 function removeBoilerPlateFiles(projectName) {
+	console.log(chalk.yellowBright("\nπ Removing boilerplate files..."));
 	const projectPath = helper.getProjectPath(projectName);
 	helper.emptyFolder(path.join(projectPath, "src", "assets"));
 	helper.emptyFolder(path.join(projectPath, "src", "components"));
-	helper.emptyFolder(path.join(projectPath, "src", "views"));
-}
-
-function findPathToMainFile(projectName) {
-	const files = fs.readdirSync(helper.getProjectPath(projectName) + "/src");
-
-	const main = files.find((fileName) => fileName.includes("main"));
-
-	return path.join(helper.getProjectPath(projectName), "src", main);
-}
-
-function importStyleInMainFile(projectName) {
-	const path = findPathToMainFile(projectName);
-	let fileContent = fs.readFileSync(path);
-	fileContent = fileContent.toString().replace("import './assets/main.css'", "");
-	fileContent = 'import("./style.css");\n' + fileContent;
-
-	fs.writeFileSync(path, fileContent, "utf-8");
 }

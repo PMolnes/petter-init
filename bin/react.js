@@ -1,20 +1,18 @@
 import helper from "./helper.js";
+import { getProjectInfo } from "./projectInfo.js";
+import chalk from "chalk";
 
-export default function setupReact(packageManager, projectName, language) {
-	const isTypeScript = language === "ts";
-
+export default function setupReact() {
+	const { projectName, language } = getProjectInfo();
 	console.log(`Setting up project: ${projectName}`);
-	helper.executeCommand(
-		`${packageManager} create vite@latest ${projectName} -- --template react${isTypeScript ? "-ts" : ""}`
-	);
+	helper.initializeViteProject();
 
-	console.log("Initializing tailwindcss...");
+	helper.initializeTailwindCSS();
 
-	helper.initializeTailwindCSS(packageManager, projectName);
+	helper.copyFile("tailwind.config.js", ["tailwind.config.js"]);
+	helper.copyFile("index.css", ["src", "index.css"]);
+	helper.copyFile("App.jsx", ["src", `App.${language === "ts" ? "tsx" : "jsx"}`]);
 
-	helper.copyFile("react", "tailwind.config.js", projectName, ["tailwind.config.js"]);
-	helper.copyFile("react", "index.css", projectName, ["src", "index.css"]);
-	helper.copyFile("react", "App.jsx", projectName, ["src", `App.${isTypeScript ? "tsx" : "jsx"}`]);
-
-	helper.removeFile(projectName, ["src", "App.css"]);
+	helper.removeFile(["src", "App.css"]);
+	console.log(chalk.green("\nπ Completed."));
 }
