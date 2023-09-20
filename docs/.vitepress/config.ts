@@ -4,6 +4,7 @@ import { defineConfig } from "vitepress";
 export default defineConfig({
 	title: "petter-init",
 	description: "TailwindCSS setup ready-to-code.",
+	base: "/petter-init/",
 	themeConfig: {
 		// https://vitepress.dev/reference/default-theme-config
 		search: {
