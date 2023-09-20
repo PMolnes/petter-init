@@ -33,6 +33,7 @@ jobs:
       - name: Build with Vitepress
         run: |
           bun run docs:build
+          ls -a ~/work/petter-init/petter-init/docs
           touch ~/work/petter-init/petter-init/docs/.vitepress/dist/.nojekyll
 
       - name: Upload artifact
