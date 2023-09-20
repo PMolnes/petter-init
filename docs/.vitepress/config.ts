@@ -12,7 +12,7 @@ export default defineConfig({
 		},
 		nav: [
 			{ text: "Home", link: "/" },
-			{ text: "Getting started", link: "/getting-started" },
+			{ text: "Getting started", link: "/introduction" },
 			{ text: "Releases", link: "https://github.com/PMolnes/petter-init/releases" },
 		],
 
