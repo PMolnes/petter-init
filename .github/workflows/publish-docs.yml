@@ -33,16 +33,12 @@ jobs:
       - name: Build with Vitepress
         run: |
           bun run docs:build
-          pwd
-          ls ~
-          ls /
-          ls -R /docs/.vitepress/
-          touch /docs/.vitepress/dist/.nojekyll
+          touch ~/work/petter-init/petter-init/docs/.vitepress/dist/.nojekyll
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: /docs/.vitepress/dist
+          path: ~/work/petter-init/petter-init/docs/.vitepress/dist
 
   deploy:
     environment:
