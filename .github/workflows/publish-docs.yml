@@ -31,8 +31,11 @@ jobs:
       - name: Install dependencies
         run: bun install
       - name: Build with Vitepress
-        run: bun run docs:build
+        run: |
+          bun run docs:build
           touch /docs/.vitepress/dist/.nojekyll
+      - name: List contents of /docs/.vitepress/ directory after build
+        run: ls -R /docs/.vitepress/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
