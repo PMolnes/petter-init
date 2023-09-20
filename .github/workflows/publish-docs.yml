@@ -27,19 +27,18 @@ jobs:
         with:
           node-version: 18
           cache: npm
-          cache-dependency-path: docs/bun.lockb
+          cache-dependency-path: bun.lockb
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Install dependencies
         run: bun install
       - name: Build with Vitepress
-        run: |
-          bun run docs:build
-          touch /.vitepress/dist/.nojekyll
+        run: bun run docs:build
+          touch docs/.vitepress/dist/.nojekyll
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: /.vitepress/dist
+          path: docs/.vitepress/dist
 
   deploy:
     environment:
