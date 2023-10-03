@@ -25,10 +25,6 @@ petter-init will do the steps listed on [tailwindcss framework guides](https://t
 2. Installing `tailwindcss`, `autoprefixer`, and `postcss` using your selected package manager.
 3. Copying necessary template files using `fs.copyFileSync`.
 
-# Buy me a coffee!
-
-If you like the tool I created and want to support me, you can buy me a coffee [here](ko-fi.com/pmolnes).
-
 # Disclaimer
 
 This project was solely created for learning purposes and hobby projects. I do not take any responibility if anything goes wrong when you use my package. **Use at your own risk**.
