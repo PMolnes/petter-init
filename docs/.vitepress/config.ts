@@ -27,7 +27,7 @@ export default defineConfig({
 		],
 
 		footer: {
-			message: "Made with ❤️ by PMolnes",
+			message: '<a target="_blank" href="https://ko-fi.com/pmolnes">Buy me a coffee ☕️</a>',
 			copyright: "Copyright © 2023-present Petter Molnes",
 		},
 

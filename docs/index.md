@@ -3,8 +3,8 @@
 layout: home
 
 hero:
-  name: "petter-init"
-  text: "A Better Initializer"
+  name: "A Better Initializer"
+  text: ""
   tagline: Instantly type TailwindCSS classes.
   actions:
     - theme: brand

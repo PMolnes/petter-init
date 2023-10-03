@@ -20,9 +20,14 @@ The name is a play on "better-init", because as it was taken on npm, I decided t
 ## How does it work?
 
 petter-init will do the steps listed on [tailwindcss framework guides](https://tailwindcss.com/docs/installation/framework-guides) for the selected framework. It does this by:
-1. It does this by initalizing a front-end project with `npm create vite@latest` and `npm create vue@latest`.
+
+1. Initalizing a front-end project with `npm create vite@latest` and `npm create vue@latest`.
 2. Installing `tailwindcss`, `autoprefixer`, and `postcss` using your selected package manager.
 3. Copying necessary template files using `fs.copyFileSync`.
+
+# Buy me a coffee!
+
+If you like the tool I created and want to support me, you can buy me a coffee [here](ko-fi.com/pmolnes).
 
 # Disclaimer
 
