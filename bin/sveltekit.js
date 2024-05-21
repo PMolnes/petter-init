@@ -1,17 +1,17 @@
-import helper from './helper.js';
-import { getProjectInfo } from './projectInfo.js';
-import chalk from 'chalk';
-import { TEMPLATES } from './templates/sveltekit/definitions.js';
-import path from 'path';
-import inquirer from 'inquirer';
+import helper from "./helper.js";
+import { getProjectInfo } from "./projectInfo.js";
+import chalk from "chalk";
+import { TEMPLATES } from "./templates/sveltekit/definitions.js";
+import path from "path";
+import inquirer from "inquirer";
 
 export default async function chooseSvelteKitTemplate() {
 	const choice = await inquirer.prompt([
 		{
-			name: 'template',
-			message: 'Select SvelteKit template',
-			type: 'list',
-			choices: ['basic', 'devkit'],
+			name: "template",
+			message: "Select SvelteKit template",
+			type: "list",
+			choices: ["basic", "devkit"],
 		},
 	]);
 
@@ -27,14 +27,14 @@ export default async function chooseSvelteKitTemplate() {
 function setupProject(template) {
 	const { packageManager, projectName } = getProjectInfo();
 
-	console.log('Setup your SvelteKit project...');
+	console.log("Setup your SvelteKit project...");
 
 	helper.executeCommand(template.initCommand(packageManager, projectName));
 	helper.executeCommand(`cd ${projectName}`);
 	template.libraries.forEach((lib) => addLibrary(lib, lib.dev || true));
 	copyTemplateFiles(TEMPLATES[0]);
 
-	console.log(chalk.green('\nπ Completed.'));
+	console.log(chalk.green("\nπ Completed."));
 }
 
 function addLibrary(library, dev) {
