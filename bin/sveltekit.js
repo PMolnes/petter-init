@@ -11,11 +11,11 @@ export default async function chooseSvelteKitTemplate() {
 			name: "template",
 			message: "Select SvelteKit template",
 			type: "list",
-			choices: ["basic", "devkit"],
+			choices: TEMPLATES.map((t) => t.name),
 		},
 	]);
 
-	const template = TEMPLATES.find((t) => t.name === choice.name);
+	const template = TEMPLATES.find((t) => t.name === choice.template);
 	if (!template) {
 		console.log(`Error: Could not find template ${template}`);
 		return;
@@ -31,20 +31,15 @@ function setupProject(template) {
 
 	helper.executeCommand(template.initCommand(packageManager, projectName));
 	helper.executeCommand(`cd ${projectName}`);
-	template.libraries.forEach((lib) => addLibrary(lib, lib.dev || true));
+	template.libraries.forEach((lib) => addLibrary(packageManager, lib, lib.dev || true));
 	copyTemplateFiles(TEMPLATES[0]);
 
 	console.log(chalk.green("\nπ Completed."));
 }
 
-function addLibrary(library, dev) {
+function addLibrary(packageManager, library, dev) {
 	console.log(chalk.yellowBright(`\nπ Initializing ${library.name}...\n`));
-	const installCommand = helper.generateInstallDependencyCommand(library, dev);
-	helper.executeCommand(installCommand);
-
-	if (library.initCommand) {
-		helper.executeCommand(library.initCommand);
-	}
+	library.commands.forEach((command) => command(packageManager))
 }
 
 /**

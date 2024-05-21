@@ -5,6 +5,21 @@ import { fileURLToPath } from "url";
 import { getProjectInfo } from "./projectInfo.js";
 import chalk from "chalk";
 
+export const PACKAGE_MANAGER_MAP = {
+	npm: {
+		executor: 'npx',
+		installer: 'install'
+	},
+	yarn: {
+		executor: 'yarn dlx',
+		installer: 'add'
+	},
+	pnpm: {
+		executor: 'pnpm dlx',
+		installer: 'install'
+	}
+}
+
 /*
   Return a string based on the framework selected and which template to copy.
 */
@@ -116,5 +131,4 @@ export default {
 	copyFile,
 	removeFile,
 	initializeViteProject,
-	generateInstallDependencyCommand,
 };
