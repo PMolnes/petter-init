@@ -3,10 +3,16 @@
 import inquirer from "inquirer";
 import chalk from "chalk";
 
-import setupSvelteKit from "./sveltekit.js";
+import chooseSvelteKitTemplate from "./sveltekit.js";
 import setupVue from "./vue.js";
 import setupReact from "./react.js";
-import { getProjectInfo, setFramework, setLanguage, setPackageManager, setProjectName } from "./projectInfo.js";
+import {
+	getProjectInfo,
+	setFramework,
+	setLanguage,
+	setPackageManager,
+	setProjectName,
+} from "./projectInfo.js";
 
 console.log(
 	chalk.green(`
@@ -30,7 +36,8 @@ const answers = await inquirer.prompt([
 		message: "JavaScript or TypeScript?",
 		type: "list",
 		choices: ["js", "ts"],
-		when: (answers) => answers.framework === "react" || answers.framework === "vue",
+		when: (answers) =>
+			answers.framework === "react" || answers.framework === "vue",
 	},
 	{
 		name: "packageManager",
@@ -55,7 +62,7 @@ const projectInfo = getProjectInfo();
 try {
 	switch (projectInfo.framework) {
 		case "sveltekit":
-			setupSvelteKit();
+			chooseSvelteKitTemplate();
 			break;
 		case "react":
 			setupReact();
@@ -64,8 +71,13 @@ try {
 			setupVue();
 			break;
 		default:
-			console.error("Invalid framework choice. Support frameworks are: sveltekit, react, vue.");
+			console.error(
+				"Invalid framework choice. Support frameworks are: sveltekit, react, vue."
+			);
 	}
 } catch (error) {
-	console.error(`Failed to create ${projectInfo.framework} app: `, error.message);
+	console.error(
+		`Failed to create ${projectInfo.framework} app: `,
+		error.message
+	);
 }
