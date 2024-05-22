@@ -2,7 +2,7 @@
 	import { page } from "$app/stores";
 	import { Toaster } from "$lib/components/ui/sonner";
 	import { getFlash } from "sveltekit-flash-message";
-	import "../app.pcss";
+	import "../app.css";
 	import { ModeWatcher } from "mode-watcher";
 	import { toast } from "svelte-sonner";
 
