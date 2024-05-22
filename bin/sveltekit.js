@@ -30,16 +30,17 @@ function setupProject(template) {
 	console.log("Setup your SvelteKit project...");
 
 	helper.executeCommand(template.initCommand(packageManager, projectName));
-	helper.executeCommand(`cd ${projectName}`);
-	template.libraries.forEach((lib) => addLibrary(packageManager, lib, lib.dev || true));
+	template.libraries.forEach((lib) => addLibrary(packageManager, projectName, lib));
 	copyTemplateFiles(TEMPLATES[0]);
 
 	console.log(chalk.green("\nπ Completed."));
 }
 
-function addLibrary(packageManager, library, dev) {
+function addLibrary(packageManager, projectName, library) {
 	console.log(chalk.yellowBright(`\nπ Initializing ${library.name}...\n`));
-	library.commands.forEach((command) => command(packageManager))
+	library.commands.forEach((command) => {
+		helper.executeCommand(`cd ${projectName} && ${command(packageManager)}`)
+	})
 }
 
 /**
@@ -47,6 +48,7 @@ function addLibrary(packageManager, library, dev) {
  * @param {*} template to copy files from
  */
 export const copyTemplateFiles = (template) => {
+	console.log(chalk.yellowBright("\nπ Copying template files...\n"));
 	const name = template.name;
 	template.files.forEach((file) => {
 		helper.copyFile(path.join(name, file.source), file.destination);

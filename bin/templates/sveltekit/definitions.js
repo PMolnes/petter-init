@@ -1,4 +1,4 @@
-import { PACKAGE_MANAGER_MAP } from "../../helper";
+import { PACKAGE_MANAGER_MAP } from "../../helper.js";
 
 export const TEMPLATES = [
 	{
@@ -28,10 +28,10 @@ export const TEMPLATES = [
 	},
   {
     name: "devkit",
-    initCommand: (packageManager, projectName) => 
-      `${packageManager} create svelte${
-        packageManager !== "yarn" ? "@latest" : ""} 
-        ${projectName} --template skeleton`,
+    initCommand: (packageManager, projectName) =>
+		`${packageManager} create svelte${
+			packageManager !== "yarn" ? "@latest" : ""
+		} ${projectName} --template skeleton`,
     files: [
 			// tailwind / shadcn
 			{ source: 'svelte.config.js', destination: [ 'svelte.config.js' ] },
