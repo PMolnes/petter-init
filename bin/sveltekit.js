@@ -5,6 +5,9 @@ import { TEMPLATES } from "./templates/sveltekit/definitions.js";
 import path from "path";
 import inquirer from "inquirer";
 
+/**
+ * Prompt the user to choose a SvelteKit template
+ */
 export default async function chooseSvelteKitTemplate() {
 	const choice = await inquirer.prompt([
 		{
@@ -24,22 +27,44 @@ export default async function chooseSvelteKitTemplate() {
 	setupProject(template);
 }
 
+/**
+ * Setup project based on selected template
+ * @param {*} template selected template
+ */
 function setupProject(template) {
 	const { packageManager, projectName } = getProjectInfo();
 
 	console.log("Setup your SvelteKit project...");
 
-	helper.executeCommand(template.initCommand(packageManager, projectName));
-	// template.libraries.forEach((lib) => addLibrary(packageManager, projectName, lib));
+	initProject(packageManager, projectName, template);
+	installLibraries(packageManager, projectName, template);
 	copyTemplateFiles(template);
 
 	console.log(chalk.green("\nπ Completed."));
 }
 
-function addLibrary(packageManager, projectName, library) {
-	console.log(chalk.yellowBright(`\nπ Initializing ${library.name}...\n`));
-	library.commands.forEach((command) => {
-		helper.executeCommand(`cd ${projectName} && ${command(packageManager)}`)
+/**
+ * Initializes the project with the selected template
+ * @param {*} packageManager to initialize with
+ * @param {*} projectName name of the project
+ * @param {*} template template to initialize with
+ */
+function initProject(packageManager, projectName, template) {
+	helper.executeCommand(template.initCommand(packageManager, projectName));
+}
+
+/**
+ * Installs the libraries for the project
+ * @param {*} packageManager package manager to install the libraries with
+ * @param {*} projectName name of the project to install the libraries to
+ * @param {*} template template to install the libraries for
+ */
+function installLibraries(packageManager, projectName, template) {
+	template.libraries.forEach((library) => {
+		console.log(chalk.yellowBright(`\nπ Initializing ${library.name}...\n`));
+		library.commands.forEach((command) => {
+			helper.executeCommand(`cd ${projectName} && ${command(packageManager)}`)
+		})
 	})
 }
 
