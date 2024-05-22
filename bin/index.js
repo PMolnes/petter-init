@@ -2,7 +2,6 @@
 
 import inquirer from "inquirer";
 import chalk from "chalk";
-
 import chooseSvelteKitTemplate from "./sveltekit.js";
 import setupVue from "./vue.js";
 import setupReact from "./react.js";
