@@ -27,7 +27,7 @@ export const TEMPLATES = [
 		],
 	},
   {
-    name: "devkit",
+    name: "JKMKit",
     initCommand: (packageManager, projectName) =>
 		`${packageManager} create svelte${
 			packageManager !== "yarn" ? "@latest" : ""

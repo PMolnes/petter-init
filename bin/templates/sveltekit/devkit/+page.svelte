@@ -102,7 +102,7 @@
 			/>
 		</g>
 	</svg>
-	<h1 class="text-5xl font-bold">DevKit</h1>
+	<h1 class="text-5xl font-bold">JKMKit</h1>
 	<p class="mb-8 text-sm text-muted-foreground">
 		A SvelteKit template for enhancing web development with advanced features and tools.
 	</p>
