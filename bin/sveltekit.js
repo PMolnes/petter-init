@@ -30,8 +30,8 @@ function setupProject(template) {
 	console.log("Setup your SvelteKit project...");
 
 	helper.executeCommand(template.initCommand(packageManager, projectName));
-	template.libraries.forEach((lib) => addLibrary(packageManager, projectName, lib));
-	copyTemplateFiles(TEMPLATES[0]);
+	// template.libraries.forEach((lib) => addLibrary(packageManager, projectName, lib));
+	copyTemplateFiles(template);
 
 	console.log(chalk.green("\nπ Completed."));
 }
