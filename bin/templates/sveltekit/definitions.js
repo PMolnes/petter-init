@@ -81,6 +81,12 @@ export const TEMPLATES = [
 				commands: [
 					(packageManager) => `${packageManager} ${PACKAGE_MANAGER_MAP[packageManager].installer} -D sveltekit-flash-message`
 				]
+			},
+			{
+				name: 'lucide-svelte',
+				commands: [
+					(packageManager) => `${packageManager} ${PACKAGE_MANAGER_MAP[packageManager].installer} lucide-svelte`
+				]
 			}
 		]
   }
