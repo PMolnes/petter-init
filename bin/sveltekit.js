@@ -74,7 +74,7 @@ function installLibraries(packageManager, projectName, template) {
  */
 export const copyTemplateFiles = (template) => {
 	console.log(chalk.yellowBright("\nπ Copying template files...\n"));
-	const name = template.name;
+	const name = template.name.toLowerCase();
 	template.files.forEach((file) => {
 		helper.copyFile(path.join(name, file.source), file.destination);
 	});
