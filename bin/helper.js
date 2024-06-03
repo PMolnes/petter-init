@@ -5,10 +5,29 @@ import { fileURLToPath } from "url";
 import { getProjectInfo } from "./projectInfo.js";
 import chalk from "chalk";
 
+export const PACKAGE_MANAGER_MAP = {
+	npm: {
+		executor: 'npx',
+		installer: 'install'
+	},
+	yarn: {
+		executor: 'yarn dlx',
+		installer: 'add'
+	},
+	pnpm: {
+		executor: 'pnpm dlx',
+		installer: 'install'
+	}
+}
+
 /*
   Return a string based on the framework selected and which template to copy.
 */
-const copyTemplateFileString = (framework, templateToCopy, destination = ".") => {
+const copyTemplateFileString = (
+	framework,
+	templateToCopy,
+	destination = "."
+) => {
 	const __dirname = path.dirname(fileURLToPath(import.meta.url));
 	let templatePath = path.join(__dirname, framework);
 	return `cp ${path.join(templatePath, templateToCopy)} ${destination}`;
@@ -67,7 +86,9 @@ const initializeViteProject = () => {
 	const extraDash = packageManager === "npm" ? "-- " : "";
 	const template = `--template ${framework}${language === "ts" ? "-ts" : ""}`;
 	executeCommand(
-		`${packageManager} create vite${packageManager !== "yarn" ? "@latest" : ""}  ${projectName} ${extraDash}${template}`
+		`${packageManager} create vite${
+			packageManager !== "yarn" ? "@latest" : ""
+		}  ${projectName} ${extraDash}${template}`
 	);
 };
 
@@ -96,7 +117,9 @@ const generateInstallDependencyCommand = (packageName, dev = true) => {
 
 	if (packageManager === "yarn") installKeyword = "add";
 
-	return `${packageManager} ${installKeyword} ${dev === true ? "-D" : ""} ${packageName}`;
+	return `${packageManager} ${installKeyword} ${
+		dev === true ? "-D" : ""
+	} ${packageName}`;
 };
 
 export default {

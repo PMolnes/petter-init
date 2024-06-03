@@ -37,7 +37,9 @@
   ],
   "devDependencies": {
     "create-svelte": "^5.0.6",
+    "execa": "^9.1.0",
     "jest": "^29.6.4",
-    "prettier": "3.0.3"
+    "prettier": "3.0.3",
+    "strip-ansi": "^7.1.0"
   }
 }
