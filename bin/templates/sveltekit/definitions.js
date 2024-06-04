@@ -21,7 +21,7 @@ export const TEMPLATES = [
 				name: "tailwindcss",
 				commands: [
 					(packageManager) => `${packageManager} ${PACKAGE_MANAGER_MAP[packageManager].installer} -D tailwindcss postcss autoprefixer`,
-					(packageManager) => `${PACKAGE_MANAGER_MAP[packageManager].executor} tailwind css init -p`
+					(packageManager) => `${PACKAGE_MANAGER_MAP[packageManager].executor} tailwindcss init -p`
 				]
 			},
 		],
